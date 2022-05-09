@@ -1,0 +1,385 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+	"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   <title>Программа, реализующая алгоритм двоичного  поиска</title>
+   <script language="JavaScript" type="text/JavaScript" src="Res/code/shared.js"></script>
+   <script language="JavaScript" type="text/JavaScript" src="Res/code/boxController.js"></script>
+   <script language="JavaScript" type="text/JavaScript" src="Res/code/boxSettings.js"></script>
+   <link href="Res/styles/shared.css" rel="stylesheet" type="text/css">
+   <link href="Res/styles/StaticOutline.css" rel="stylesheet" type="text/css">
+</head>
+<body id="page" onload="init()">
+<!-- BEGIN PAGE HEADER -->
+<table id="pageHeader">
+   <tr>
+      <td class="left" rowspan="3">
+         <a class="noHover" href="index.html" target="_parent">
+         <img src="Res/images/logo.gif" alt=""></a> 
+      </td>
+      <td class="right">
+<!-- BEGIN TOOLS UTILITIES--> 
+<div class="utilities">
+  <span class="command">
+    <a href="index.html" target="_parent">
+      <span class="label">Домой</span>
+    </a>
+  </span>
+<span class="utilities_toc">
+|
+  <span class="command">
+    <a href="contents.htm" target="_parent">
+      <span class="label">Оглавление</span>
+    </a>
+  </span>
+</span>
+<!-- BEGIN HEADER UTILITIES OVERVIEW SNIPPET --> 
+|
+  <span class="command">
+     <a href="map.htm" target="_parent">
+       <span class="label">Карта</span>
+     </a>
+  </span>
+<!-- END HEADER UTILITIES OVERVIEW SNIPPET --> 
+
+<!-- BEGIN HEADER UTILITIES LEGEND SNIPPET --> 
+|
+  <span class="command">
+    <a href="javascript:openPopup('legend.htm','Legend','scrollbars=yes,resizable=yes,left=20,top=20,width=240,height=450')"> 
+      <span class="label">Иконки</span>
+    </a>
+  </span>        
+<!-- END HEADER UTILITIES LEGEND SNIPPET --> 
+
+</div>
+<!-- END TOOLS UTILITIES--> 
+
+      </td>
+   </tr>
+   <tr>
+      <td class="right">
+        <div class="mapName">Алгоритмы поиска</div>
+      </td>
+   </tr>
+   <tr>
+      <td class="right">
+        <div class="contactInformation">A.F.Oskin@pdu.by&nbsp;&nbsp;<a href="mailto:Admin@pdu.by">Admin@pdu.by</a></div>
+      </td>
+   </tr>
+</table>
+<!-- END PAGE HEADER -->
+
+<!-- BEGIN PAGE BODY-->
+
+<!-- BEGIN SIDE NAVIGATION WRAPPER-->
+<table>
+  <tr>
+    <td class="outlineColumn">
+    <!-- Ensure minimum width of outline-->
+    <img class="emptyImage" src="Res/images/empty.gif" 
+        width="190" height="1" alt=""><br>									
+<!-- STATIC OUTLINE - START -->
+  <div class="staticOutline">
+  <div class="hometopic">
+	<img src="Res/images/arrow.gif" alt=""><span class="unselect"><a href="index.html">&nbsp;Домой&nbsp;</a></span>
+  </div>
+  <div class="maintopic">
+	<img src="Res/images/arrow.gif" alt=""><span class="unselect"><a href="Page2.html">&nbsp;1. Линейный поиск&nbsp;</a></span>
+  </div>
+  <div class="subtopic">
+	<img src="Res/images/arrow.gif" alt=""><span class="unselect"><a href="Page3.html">&nbsp;Идея алгоритма&nbsp;</a></span>
+  </div>
+  <div class="subtopic">
+	<img src="Res/images/arrow.gif" alt=""><span class="unselect"><a href="Page4.html">&nbsp;Программа, реализующая алгорит... &nbsp;</a></span>
+  </div>
+  <div class="maintopic">
+	<img src="Res/images/arrow.gif" alt=""><span class="unselect"><a href="Page5.html">&nbsp;2. Двоичный поиск &nbsp;</a></span>
+  </div>
+  <div class="subtopic">
+	<img src="Res/images/arrow.gif" alt=""><span class="unselect"><a href="Page6.html">&nbsp;Идея алгоритма&nbsp;</a></span>
+  </div>
+  <div class="subtopic">
+	<img src="Res/images/arrow.gif" alt=""><span class="select"><a href="Page7.html">&nbsp;Программа, реализующая алгорит... &nbsp;</a></span>
+  </div>
+  <div class="maintopic">
+	<img src="Res/images/arrow.gif" alt=""><span class="unselect"><a href="Page8.html">&nbsp;3. Другие алгоритмы поиска&nbsp;</a></span>
+  </div>
+  <div class="subtopic">
+	<img src="Res/images/arrow.gif" alt=""><span class="unselect"><a href="Page9.html">&nbsp;Интерполяционный поиск&nbsp;</a></span>
+  </div>
+
+  </div>
+<!-- STATIC OUTLINE - END -->
+
+    </td>
+    <td class="bodyColumn">
+<!-- END SIDE NAVIGATION WRAPPER-->
+
+<table id="pageBody">
+ <col class="main">
+ <col class="right">
+
+
+<!--BEGIN PAGE BODY ITEM-->
+<tr class="topic">
+  <td class="main" valign="top" colspan="2">
+    <table>
+      <tr class="topicHeader">
+        <td class="topicImageColumn">
+
+        </td>
+        <td class="topicLineColumn">
+          <a name="Topic7"></a>
+          <span class=outlineNumberFirst></span><span class=topicLineFirst>Программа, реализующая алгоритм двоичного  поиска</span>
+          <span class="topicIcons">
+
+          </span>
+        </td>
+      </tr>
+    </table>
+
+
+     <div class="topicTextNotes"><div align="left"><font face="Courier New"><span style=
+" font-size:11pt"><b>#include
+&lt;iostream&gt;</b></span></font></div>
+<div align="left"><font face="Courier New"><span style=
+" font-size:11pt"><b>using namespace std;</b></span></font></div>
+<div align="left"></div>
+<div align="left"><font face="Courier New"><span style=
+" font-size:11pt"><b>//&#160;</b></span></font><font face=
+"Courier New CYR"><span style=
+" font-size:11pt"><b>&#1092;&#1091;&#1085;&#1082;&#1094;&#1080;&#1103;
+&#1089;
+&#1072;&#1083;&#1075;&#1086;&#1088;&#1080;&#1090;&#1084;&#1086;&#1084;
+&#1076;&#1074;&#1086;&#1080;&#1095;&#1085;&#1086;&#1075;&#1086;
+&#1087;&#1086;&#1080;&#1089;&#1082;&#1072;</b></span></font></div>
+<div align="left"><font face="Courier New CYR"><span style=
+" font-size:11pt"><b>int Search_Binary (int arr[], int left, int
+right, int key)</b></span></font></div>
+<div align="left"><font face="Courier New CYR"><span style=
+" font-size:11pt"><b>{</b></span></font></div>
+<div align="left"><font face="Courier New CYR"><span style=
+" font-size:11pt"><b>&#160;int midd = 0;</b></span></font></div>
+<div align="left"><font face="Courier New CYR"><span style=
+" font-size:11pt"><b>&#160;while (1)</b></span></font></div>
+<div align="left"><font face="Courier New CYR"><span style=
+" font-size:11pt"><b>&#160;{</b></span></font></div>
+<div align="left"><font face="Courier New CYR"><span style=
+" font-size:11pt"><b>&#160;midd = (left + right) /
+2;</b></span></font></div>
+<div align="left"></div>
+<div align="left"><font face="Courier New CYR"><span style=
+" font-size:11pt"><b>&#160;if (key &lt;
+arr[midd])&#160;&#160;&#160;&#160;&#160;&#160; //
+&#1077;&#1089;&#1083;&#1080;
+&#1080;&#1089;&#1082;&#1086;&#1084;&#1086;&#1077;
+&#1084;&#1077;&#1085;&#1100;&#1096;&#1077;
+&#1079;&#1085;&#1072;&#1095;&#1077;&#1085;&#1080;&#1103; &#1074;
+&#1103;&#1095;&#1077;&#1081;&#1082;&#1077;</b></span></font></div>
+<div align="left"><font face="Courier New CYR"><span style=
+" font-size:11pt"><b>&#160;right = midd -
+1;&#160;&#160;&#160;&#160;&#160; //
+&#1089;&#1084;&#1077;&#1097;&#1072;&#1077;&#1084;
+&#1087;&#1088;&#1072;&#1074;&#1091;&#1102;
+&#1075;&#1088;&#1072;&#1085;&#1080;&#1094;&#1091;
+&#1087;&#1086;&#1080;&#1089;&#1082;&#1072;</b></span></font></div>
+<div align="left"><font face="Courier New CYR"><span style=
+" font-size:11pt"><b>&#160;else if (key &gt; arr[midd])&#160; //
+&#1077;&#1089;&#1083;&#1080;
+&#1080;&#1089;&#1082;&#1086;&#1084;&#1086;&#1077;
+&#1073;&#1086;&#1083;&#1100;&#1096;&#1077;
+&#1079;&#1085;&#1072;&#1095;&#1077;&#1085;&#1080;&#1103; &#1074;
+&#1103;&#1095;&#1077;&#1081;&#1082;&#1077;</b></span></font></div>
+<div align="left"><font face="Courier New CYR"><span style=
+" font-size:11pt"><b>&#160;left = midd + 1;&#160;&#160;&#160; //
+&#1089;&#1084;&#1077;&#1097;&#1072;&#1077;&#1084;
+&#1083;&#1077;&#1074;&#1091;&#1102;
+&#1075;&#1088;&#1072;&#1085;&#1080;&#1094;&#1091;
+&#1087;&#1086;&#1080;&#1089;&#1082;&#1072;</b></span></font></div>
+<div align="left"><font face="Courier New CYR"><span style=
+" font-size:11pt"><b>&#160;else&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;
+// &#1080;&#1085;&#1072;&#1095;&#1077;
+(&#1079;&#1085;&#1072;&#1095;&#1077;&#1085;&#1080;&#1103;
+&#1088;&#1072;&#1074;&#1085;&#1099;)</b></span></font></div>
+<div align="left"><font face="Courier New CYR"><span style=
+" font-size:11pt"><b>&#160;return
+midd;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;
+// &#1092;&#1091;&#1085;&#1082;&#1094;&#1080;&#1103;
+&#1074;&#1086;&#1079;&#1074;&#1088;&#1072;&#1097;&#1072;&#1077;&#1090;
+&#1080;&#1085;&#1076;&#1077;&#1082;&#1089;
+&#1103;&#1095;&#1077;&#1081;&#1082;&#1080;</b></span></font></div>
+<div align="left"></div>
+<div align="left"><font face="Courier New CYR"><span style=
+" font-size:11pt"><b>&#160;if (left &gt;
+right)&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; //
+&#1077;&#1089;&#1083;&#1080;
+&#1075;&#1088;&#1072;&#1085;&#1080;&#1094;&#1099;
+&#1089;&#1086;&#1084;&#1082;&#1085;&#1091;&#1083;&#1080;&#1089;&#1100;</b></span></font></div>
+<div align="left"><font face="Courier New CYR"><span style=
+" font-size:11pt"><b>&#160;return -1;</b></span></font></div>
+<div align="left"><font face="Courier New CYR"><span style=
+" font-size:11pt"><b>&#160;}</b></span></font></div>
+<div align="left"><font face="Courier New CYR"><span style=
+" font-size:11pt"><b>}</b></span></font></div>
+<div align="left"></div>
+<div align="left"><font face="Courier New CYR"><span style=
+" font-size:11pt"><b>int main()</b></span></font></div>
+<div align="left"><font face="Courier New CYR"><span style=
+" font-size:11pt"><b>{</b></span></font></div>
+<div align="left"><font face="Courier New CYR"><span style=
+" font-size:11pt"><b>&#160;setlocale (LC_ALL,
+"rus");</b></span></font></div>
+<div align="left"></div>
+<div align="left"><font face="Courier New CYR"><span style=
+" font-size:11pt"><b>&#160;const int SIZE
+=&#160;</b></span></font><font face="Courier New"><span style=
+" font-size:11pt"><b>12</b></span></font><font face=
+"Courier New CYR"><span style=
+" font-size:11pt"><b>;</b></span></font></div>
+<div align="left"><font face="Courier New CYR"><span style=
+" font-size:11pt"><b>&#160;int array[SIZE] =
+{};</b></span></font></div>
+<div align="left"><font face="Courier New CYR"><span style=
+" font-size:11pt"><b>&#160;int key = 0;</b></span></font></div>
+<div align="left"><font face="Courier New CYR"><span style=
+" font-size:11pt"><b>&#160;int index = 0; //
+&#1080;&#1085;&#1076;&#1077;&#1082;&#1089;
+&#1103;&#1095;&#1077;&#1081;&#1082;&#1080; &#1089;
+&#1080;&#1089;&#1082;&#1086;&#1084;&#1099;&#1084;
+&#1079;&#1085;&#1072;&#1095;&#1077;&#1085;&#1080;&#1077;&#1084;</b></span></font></div>
+<div align="left"></div>
+<div align="left"><font face="Courier New CYR"><span style=
+" font-size:11pt"><b>&#160;for (int i = 0; i &lt; SIZE; i++) //
+&#1079;&#1072;&#1087;&#1086;&#1083;&#1085;&#1103;&#1077;&#1084;
+&#1080;
+&#1087;&#1086;&#1082;&#1072;&#1079;&#1099;&#1074;&#1072;&#1077;&#1084;
+&#1084;&#1072;&#1089;&#1089;&#1080;&#1074;</b></span></font></div>
+<div align="left"><font face="Courier New CYR"><span style=
+" font-size:11pt"><b>&#160;{</b></span></font></div>
+<div align="left"><font face="Courier New CYR"><span style=
+" font-size:11pt"><b>&#160;array[i] = i +
+1;</b></span></font></div>
+<div align="left"><font face="Courier New CYR"><span style=
+" font-size:11pt"><b>&#160;cout &lt;&lt; array[i] &lt;&lt; " |
+";</b></span></font></div>
+<div align="left"><font face="Courier New CYR"><span style=
+" font-size:11pt"><b>&#160;}</b></span></font></div>
+<div align="left"></div>
+<div align="left"><font face="Courier New CYR"><span style=
+" font-size:11pt"><b>&#160;cout &lt;&lt;
+"\n\n&#1042;&#1074;&#1077;&#1076;&#1080;&#1090;&#1077;
+&#1083;&#1102;&#1073;&#1086;&#1077;
+&#1095;&#1080;&#1089;&#1083;&#1086;: ";</b></span></font></div>
+<div align="left"><font face="Courier New CYR"><span style=
+" font-size:11pt"><b>&#160;cin &gt;&gt;
+key;</b></span></font></div>
+<div align="left"></div>
+<div align="left"><font face="Courier New CYR"><span style=
+" font-size:11pt"><b>&#160;index = Search_Binary (array, 0, SIZE,
+key);</b></span></font></div>
+<div align="left"></div>
+<div align="left"><font face="Courier New CYR"><span style=
+" font-size:11pt"><b>&#160;if (index &gt;=
+0)</b></span></font></div>
+<div align="left"><font face="Courier New CYR"><span style=
+" font-size:11pt"><b>&#160;cout &lt;&lt;
+"&#1059;&#1082;&#1072;&#1079;&#1072;&#1085;&#1085;&#1086;&#1077;
+&#1095;&#1080;&#1089;&#1083;&#1086;
+&#1085;&#1072;&#1093;&#1086;&#1076;&#1080;&#1090;&#1089;&#1103;
+&#1074; &#1103;&#1095;&#1077;&#1081;&#1082;&#1077; &#1089;
+&#1080;&#1085;&#1076;&#1077;&#1082;&#1089;&#1086;&#1084;: "
+&lt;&lt; index &lt;&lt; "\n\n";</b></span></font></div>
+<div align="left"><font face="Courier New CYR"><span style=
+" font-size:11pt"><b>&#160;else</b></span></font></div>
+<div align="left"><font face="Courier New CYR"><span style=
+" font-size:11pt"><b>&#160;cout &lt;&lt; "&#1042;
+&#1084;&#1072;&#1089;&#1089;&#1080;&#1074;&#1077;
+&#1085;&#1077;&#1090; &#1090;&#1072;&#1082;&#1086;&#1075;&#1086;
+&#1095;&#1080;&#1089;&#1083;&#1072;!\n\n";</b></span></font></div>
+<div align="left"></div>
+<div align="left"><font face="Courier New CYR"><span style=
+" font-size:11pt"><b>&#160;return 0;</b></span></font></div>
+<div align="left"><font face="Courier New CYR"><span style=
+" font-size:11pt"><b>}</b></span></font></div>
+<div align="left"></div>
+<div align="left">&#160;</div></div>
+
+
+
+
+
+
+  </td>
+  <td class="right" valign="top">
+<!--right body column empty-->
+  </td>
+</tr>
+<!--END PAGE BODY ITEM-->
+
+
+<!-- BEGIN TOP BUTTON -->
+<tr class="topic">
+  <td class="main" valign="top" colspan="2">
+    <div class="body">
+      <div class="topCommand">
+        <span class="commands">
+	  <span class="command">
+            <img src="Res/images/top_button.gif" alt=""> 
+	      <a href="javascript:scroll(0,0)">
+	         <span class="label">Вверх</span>
+              </a>
+ 	</span>
+       </span>
+      </div>
+    </div>
+  </td>
+  <td class="right" valign="top">
+<!--right body column empty-->
+  </td>
+</tr>
+<!-- END TOP BUTTON -->
+
+</table>
+
+<!-- BEGIN SIDE NAVIGATION WRAPPER-->
+    </td>
+  </tr>
+</table> 
+<!-- END SIDE NAVIGATION WRAPPER-->
+
+<!-- END PAGE BODY-->
+
+<!---BEGIN FOOTER-->
+<table id="pageFooter">
+   <tr>
+      <!-- reserved for image <td class="left" rowspan="2"></td>-->
+      <td class="center" rowspan="2">
+         <div class="footerText">Алгоритмы поиска</div>
+      </td>
+      <td class="right">
+         <div class="hyperlink">
+            <span>   
+               <a href="http://www.mindjet.com/" target="_blank">Powered By Mindjet MindManager</a>
+            </span>
+         </div>
+      </td>
+   </tr>
+   <tr>
+      <td class="right">
+         <div class="lastUpdated">
+            <span>Последние изменения:</span>
+            <span>08.05.2022</span>
+         </div>
+      </td>
+   </tr>
+   <tr>
+     <td></td>
+   </tr>
+</table>
+<!---END FOOTER-->
+
+
+</body>
+</html>
+
